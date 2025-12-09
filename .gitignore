@@ -1,0 +1,55 @@
+/.venv
+/data/*
+/embeddings/*
+/ground_truth/*
+/.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+
+# Additional virtual environments
+/venv/
+/env/
+
+# Project-generated artifacts (large/binary)
+/indices/*
+
+
+# Results
+/results_benchmark/**
+!/results_benchmark/**/
+/results_model_benchmark/**
+!/results_model_benchmark/**/
+/results_rerank/**
+!/results_rerank/**/
+
+# Plots
+/plots/**
+!/plots/**/
+
+# Dirs tracked
+!/data/.gitkeep
+!/embeddings/.gitkeep
+!/indices/.gitkeep
+!/results/.gitkeep
+!/ground_truth/.gitkeep
+!/results_benchmark/.gitkeep
+!/plots/.gitkeep
+!/results_model_benchmark/.gitkeep
+!/results_rerank/.gitkeep
+
+# Jupyter
+/.ipynb_checkpoints/
+
+# Environment files
+.env
+.env.*
+!.env.example
+.python-version
+
+# Editor/OS
+/.vscode/
+/.idea/
+Thumbs.db
