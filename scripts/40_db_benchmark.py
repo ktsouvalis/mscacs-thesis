@@ -248,18 +248,18 @@ def run_pinecone(dataset, queries, k, id_map):
     
     # 1. Select Host based on Dataset
     if "ml20m" in dataset:
-        host = os.getenv("PINECONE_HOST_MOVIELENS")
+        index_name = os.getenv("PINECONE_INDEX_MOVIELENS")
         print(f"[Pinecone] Connecting to MovieLens Host...")
     else:
-        host = os.getenv("PINECONE_HOST_FIQA")
+        index_name = os.getenv("PINECONE_INDEX_FIQA")
         print(f"[Pinecone] Connecting to FiQA Host...")
 
-    if not host:
+    if not index_name:
         print("Error: Pinecone Host not found in .env")
         return []
 
     pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-    idx = pc.Index(host=host)
+    idx = pc.Index(index_name)
     
     t0 = time.time()
     all_ids = []

@@ -147,8 +147,6 @@ def index_pinecone(name, ids, vecs):
     Requires PINECONE_API_KEY in .env file.
     """
     from pinecone import Pinecone, ServerlessSpec
-    from dotenv import load_dotenv
-    load_dotenv(os.path.join(utils.BASE, ".env"))
     
     pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
 
@@ -178,7 +176,6 @@ if __name__ == "__main__":
     ap.add_argument("--dataset", required=True, choices=["fiqa_corpus", "ml20m_movie"])
     ap.add_argument("--backend", required=True, choices=["faiss", "chroma", "milvus", "pinecone"])
     ap.add_argument("--model", default="mini")
-    ap.add_argument("--name", default=None)
     
     args = ap.parse_args()
 
@@ -186,8 +183,13 @@ if __name__ == "__main__":
     tag = "doc" if "fiqa" in args.dataset else "movie"
     full_ids = make_ids(raw_ids, tag)
 
-    if args.name:
-        name = args.name
+    if args.backend == "pinecone":
+        from dotenv import load_dotenv
+        load_dotenv(os.path.join(utils.BASE, ".env"))
+        if args.dataset == "fiqa_corpus":
+            name = os.getenv("PINECONE_INDEX_FIQA")
+        else:
+            name = os.getenv("PINECONE_INDEX_MOVIELENS")
     else:
         name = f"{args.dataset}_{args.model}_{args.backend}" if args.model != "mini" else f"{args.dataset}_{args.backend}"
         

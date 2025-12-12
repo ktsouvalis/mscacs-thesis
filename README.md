@@ -26,8 +26,8 @@ OPENAI_API_KEY=your_openai_key_here
 
 # Pinecone access (used by 30_build_indexes.py and 40_db_benchmark.py)
 PINECONE_API_KEY=your_pinecone_key_here
-PINECONE_HOST_FIQA=your_fiqa_host
-PINECONE_HOST_MOVIELENS=your_movielens_host
+PINECONE_INDEX_FIQA=your_fiqa_index_name_here
+PINECONE_INDEX_MOVIELENS=your_movielens_index_name_here
 
 # Milvus configuration
 MILVUS_HOST=your_milvus_host_here
