@@ -150,6 +150,9 @@ def index_pinecone(name, ids, vecs):
     
     pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
 
+    if not name:
+        raise ValueError("Pinecone index name is missing. Check PINECONE_INDEX_FIQA or PINECONE_INDEX_MOVIELENS in your .env file.")
+
     # Pinecone names must be lower-case and alphanumeric/hyphens
     safe_name = name.replace("_", "-").lower()
     
@@ -190,6 +193,8 @@ if __name__ == "__main__":
             name = os.getenv("PINECONE_INDEX_FIQA")
         else:
             name = os.getenv("PINECONE_INDEX_MOVIELENS")
+        if not name:
+            raise ValueError("Missing Pinecone index name in .env. Set PINECONE_INDEX_FIQA or PINECONE_INDEX_MOVIELENS accordingly.")
     else:
         name = f"{args.dataset}_{args.model}_{args.backend}" if args.model != "mini" else f"{args.dataset}_{args.backend}"
         
